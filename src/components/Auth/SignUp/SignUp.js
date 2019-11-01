@@ -2,6 +2,7 @@ import React, { useState, useReducer } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { createUser } from '../../../api';
 import { normalizeEmail, isLength } from 'validator';
+import Error from '../../Error/Error'
 
 export default function SignUp(props) {
   const [ signUpSuccess, setSignUpSuccess ] = useState(false);
@@ -113,9 +114,9 @@ export default function SignUp(props) {
 
       {
         error &&
-        <div className='error'>
-          <p className='error-message'>{error}</p>
-        </div>
+        <Error
+          message={error}
+        />
       }
 
     </div>

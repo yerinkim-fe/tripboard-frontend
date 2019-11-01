@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import { Link } from 'react-router-dom';
 import { normalizeEmail, isLength } from 'validator';
+import Error from '../../Error/Error'
 
 export default function SignIn(props) {
   const { onSignIn, errorMessage } = props;
@@ -81,9 +82,9 @@ export default function SignIn(props) {
 
       {
         error &&
-        <div className='error'>
-          <p className='error-message'>{error}</p>
-        </div>
+        <Error
+          message={error}
+        />
       }
 
     </div>
