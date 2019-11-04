@@ -79,36 +79,34 @@ export default function SignUp(props) {
   }
 
   return (
-    <div>
+    <div className='auth'>
       <h1>회원가입</h1>
 
-      <div className='auth'>
-        <form onSubmit={handleSubmit}>
-          <input
-            type='email'
-            name='email'
-            placeholder='email'
-            value={userInput.email}
-            onChange={handleChange}
-          />
-          <input
-            type='text'
-            name='name'
-            placeholder='name'
-            value={userInput.name}
-            onChange={handleChange}
-          />
-          <input
-            type='password'
-            name='password'
-            placeholder='password'
-            value={userInput.password}
-            onChange={handleChange}
-          />
+      <form onSubmit={handleSubmit}>
+        <input
+          type='email'
+          name='email'
+          placeholder='email'
+          value={userInput.email}
+          onChange={handleChange}
+        />
+        <input
+          type='text'
+          name='name'
+          placeholder='name'
+          value={userInput.name}
+          onChange={handleChange}
+        />
+        <input
+          type='password'
+          name='password'
+          placeholder='password'
+          value={userInput.password}
+          onChange={handleChange}
+        />
 
-          <input type='submit' value='등록' />
-        </form>
-      </div>
+        <input type='submit' value='등록' />
+      </form>
 
       <Link to={'/signin'}>Sign in</Link>
 

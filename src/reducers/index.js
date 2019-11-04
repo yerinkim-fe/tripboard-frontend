@@ -13,13 +13,24 @@ function isToken() {
 
 const initialState = {
   isAuthenticated: isToken(),
+  user: {},
   errorMessage: ''
 };
 
 export function authReducer(state = initialState.isAuthenticated, action) {
   switch(action.type) {
-    case types.SET_CURRENT_USER:
+    case types.SET_AUTHENTICATED:
       return action.isAuthenticated;
+
+    default:
+      return state;
+  }
+}
+
+export function userReducer(state = initialState.user, action) {
+  switch(action.type) {
+    case types.SET_CURRENT_USER:
+      return {...action.user};
 
     default:
       return state;
@@ -38,5 +49,6 @@ export function errorReducer(state = initialState.errorMessage, action) {
 
 export default combineReducers({
   isAuthenticated: authReducer,
+  user: userReducer,
   errorMessage: errorReducer
 });

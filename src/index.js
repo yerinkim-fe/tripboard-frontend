@@ -13,8 +13,8 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <App
-      googleMapURL={'https://maps.googleapis.com/maps/api/js?key=AIzaSyDIUcpcXHO8yGpPEt8MjwozzHz5OiyDr_U&libraries=places'}
-      loadingElement={<div style={ { height: '100%' }} />}
+      googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLEMAP_APIKEY}&libraries=places`}
+      loadingElement={<div style={ { height: '100vh' }} />}
     />
   </Provider>
 , document.getElementById('root'));
