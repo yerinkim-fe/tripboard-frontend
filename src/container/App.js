@@ -4,6 +4,7 @@ import App from '../components/App/App';
 import { getToken, getUser } from '../api';
 import { setIsAuthenticated, setCurrentUser, setError } from '../actions';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
+import jwt from 'jsonwebtoken';
 
 const mapStateToProps = state => {
   return {
@@ -20,13 +21,12 @@ const mapDispatchToProps = dispatch => {
 
       if (res.status === 200) {
         const token = res.data.token;
-
         localStorage.setItem('jwtToken', token);
         setAuthorizationToken(localStorage.jwtToken);
-        dispatch(setIsAuthenticated(true));
 
-        const userinfo = await getUser(user);
-        dispatch(setCurrentUser(userinfo.data));
+        const user = jwt.verify(token, process.env.REACT_APP_YOUR_SECRET_KEY);
+        dispatch(setCurrentUser(user));
+        dispatch(setIsAuthenticated(true));
       } else {
         dispatch(setError(res.data.message));
       }
@@ -34,7 +34,20 @@ const mapDispatchToProps = dispatch => {
     onSignOut() {
       localStorage.removeItem('jwtToken');
       setAuthorizationToken(localStorage.jwtToken);
+      dispatch(setCurrentUser({}));
       dispatch(setIsAuthenticated(false));
+    },
+    onConfirmUser(token) {
+      try {
+        const user = jwt.verify(token, process.env.REACT_APP_YOUR_SECRET_KEY);
+        dispatch(setCurrentUser(user));
+        dispatch(setIsAuthenticated(true));
+      } catch (err) {
+        localStorage.removeItem('jwtToken');
+        setAuthorizationToken(localStorage.jwtToken);
+        dispatch(setCurrentUser({}));
+        dispatch(setIsAuthenticated(false));
+      }
     }
   };
 };

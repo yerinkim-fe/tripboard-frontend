@@ -2,20 +2,14 @@ import { combineReducers } from 'redux';
 import * as types from "../constants/actionTypes";
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 
-function isToken() {
-  if (localStorage.jwtToken) {
-    setAuthorizationToken(localStorage.jwtToken);
-    return true;
-  } else {
-    return false;
-  }
-}
-
 const initialState = {
-  isAuthenticated: isToken(),
+  isAuthenticated: false,
   user: {},
   errorMessage: ''
 };
+
+// 로그인을 할 때 getUser를 하면 그 순간에만 user정보가 state에 저장되고 리렌더링할 때 초기화된다. 왜??? 로그인완료 후에만 가져오니까.
+// 그래서 렌더링할 때마다 getUser를 했는데.. 비동기 문제... tripboard에서.. 어떻게 처리해야하지??
 
 export function authReducer(state = initialState.isAuthenticated, action) {
   switch(action.type) {

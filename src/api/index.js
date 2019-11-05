@@ -34,6 +34,15 @@ export const getUser = async user => {
   }
 };
 
+export const uploadFile = async formData => {
+  try {
+    const res = await axios.post('/api/trips/photos/upload', formData);
+    return res;
+  } catch (err) {
+    return err.response;
+  }
+};
+
 export const createTrip = async (trip, userId) => {
   try {
     const res = await axios.post(`/api/users/${userId}/trips/new`, trip);
@@ -43,9 +52,10 @@ export const createTrip = async (trip, userId) => {
   }
 };
 
-export const uploadFile = async formData => {
+export const getTrip = async userId => {
+  console.log(userId);
   try {
-    const res = await axios.post('/api/trips/photos/upload', formData);
+    const res = await axios.get(`/api/users/${userId}/trips`);
     return res;
   } catch (err) {
     return err.response;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import SignIn from '../Auth/SignIn/SignIn';
 import SignUp from '../Auth/SignUp/SignUp';
@@ -7,17 +7,13 @@ import TripNew from '../Trip/TripNew/TripNew';
 import './App.scss';
 
 export default function App(props) {
-  const { isAuthenticated, user, onSignIn, onSignOut, errorMessage } = props;
+  const { onConfirmUser, isAuthenticated, user, onSignIn, onSignOut, errorMessage } = props;
 
-  console.log('11111', props);
-
-  // useEffect(() => {
-  //   props.onLoad()
-  // }, []);
-
-  // if (props.isLoading) {
-  //   return <div className='loading'></div>
-  // }
+  useEffect(() => {
+    if (localStorage.jwtToken) {
+      onConfirmUser(localStorage.jwtToken);
+    }
+  }, []);
 
   return (
     <Router>
@@ -44,11 +40,13 @@ export default function App(props) {
         />
         <Route
           exact path='/'
-          render={() => {
+          render={routeProps => {
             if (isAuthenticated) {
               return <TripBoard
+                {...routeProps}
                 onSignOut={onSignOut}
                 errorMessage={errorMessage}
+                user={user}
               />
             } else {
               return <Redirect to='/signin' />;
