@@ -1,3 +1,4 @@
 export const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const TRIP_DATA_LOAD = 'TRIP_DATA_LOAD';
 export const SET_ERROR = 'SET_ERROR';

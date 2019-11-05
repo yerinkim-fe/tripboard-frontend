@@ -9,7 +9,7 @@ Geocode.setApiKey(process.env.REACT_APP_GOOGLEMAP_APIKEY);
 Geocode.setLanguage("ko");
 Geocode.enableDebug();
 
-export default function Map(props) {
+export default function TripMap(props) {
   let lat = 37.566682;
   let lng = 126.978382;
 

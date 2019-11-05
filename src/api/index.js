@@ -53,7 +53,6 @@ export const createTrip = async (trip, userId) => {
 };
 
 export const getTrip = async userId => {
-  console.log(userId);
   try {
     const res = await axios.get(`/api/users/${userId}/trips`);
     return res;

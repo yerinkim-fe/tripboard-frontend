@@ -7,7 +7,7 @@ import TripNew from '../Trip/TripNew/TripNew';
 import './App.scss';
 
 export default function App(props) {
-  const { onConfirmUser, isAuthenticated, user, onSignIn, onSignOut, errorMessage } = props;
+  const { onConfirmUser, isAuthenticated, user, onSignIn, onSignOut, onTripLoad, trip, errorMessage } = props;
 
   useEffect(() => {
     if (localStorage.jwtToken) {
@@ -34,8 +34,12 @@ export default function App(props) {
         <Route
           exact path='/signup'
           render={() => {
-            return <SignUp
-            />
+            if (isAuthenticated) {
+              return <Redirect to='/' />;
+            } else {
+              return <SignUp
+              />
+            }
           }}
         />
         <Route
@@ -44,6 +48,8 @@ export default function App(props) {
             if (isAuthenticated) {
               return <TripBoard
                 {...routeProps}
+                onTripLoad={onTripLoad}
+                trip={trip}
                 onSignOut={onSignOut}
                 errorMessage={errorMessage}
                 user={user}

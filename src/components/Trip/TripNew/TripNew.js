@@ -109,7 +109,7 @@ export default function TripNew(props) {
       description: userInput.description
     };
 
-    const res = await createTrip(trip, user._id);
+    const res = await createTrip(trip, user.user_id);
 
     if (res.status === 201) {
       setCreateSuccess(true);

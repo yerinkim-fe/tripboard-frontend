@@ -11,6 +11,11 @@ export const setCurrentUser = user => ({
   user
 });
 
+export const tripDataLoad = trip => ({
+  type: types.TRIP_DATA_LOAD,
+  trip
+});
+
 export const setError = message => ({
   type: types.SET_ERROR,
   message

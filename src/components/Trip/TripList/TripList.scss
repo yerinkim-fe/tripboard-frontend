@@ -1,0 +1,27 @@
+.trip-list {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: -100vh;
+  animation: slide-right .3s forwards;
+  background: #fff;
+  z-index: 1;
+}
+
+@keyframes slide-right {
+  100% { left: 0; }
+}
+
+@keyframes slide-left {
+  100% { left: -100vh; }
+}
+
+.button-list-hide {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+}
