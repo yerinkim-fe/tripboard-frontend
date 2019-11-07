@@ -1,12 +1,17 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { createUser } from '../../../api';
 import { normalizeEmail, isLength } from 'validator';
 import Error from '../../Error/Error'
 
 export default function SignUp(props) {
+  const { errorMessage } = props;
   const [ signUpSuccess, setSignUpSuccess ] = useState(false);
   const [ error, setError ] = useState('');
+
+  useEffect(() => {
+    setError(errorMessage);
+  }, [errorMessage]);
 
   const [userInput, setUserInput] = useReducer((state, newState) => ({...state, ...newState}), {
     email: '',
