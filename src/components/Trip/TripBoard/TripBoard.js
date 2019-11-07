@@ -102,12 +102,11 @@ export default function TripBoard(props) {
     <div className='container'>
       <div className='header'>
         <h1>트립보드 메인</h1>
-        <ul>
-          <li><button type='button' onClick={handleSignOut}>Sign out</button></li>
-        </ul>
-
+        <button type='button' onClick={handleSignOut}>Sign out</button>
         <button type='button' onClick={handleShowListClick}>리스트로 보기</button>
+
         <Link to='/new'>+</Link>
+        <Link to='/chart'>chart</Link>
 
       </div>
 

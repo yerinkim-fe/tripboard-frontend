@@ -7,6 +7,7 @@ import './TripDetail.scss';
 
 export default function TripDetail(props) {
   const { errorMessage, history, match } = props;
+  const [ shareButton, setShareButton ] = useState('share-button');
   const [ tripDetail, setTripDetail ] = useState('');
   const [ isModalShow, setIsModalShow ] = useState(false);
   const [ size, setSize ] = useState([0, 0]);
@@ -25,23 +26,18 @@ export default function TripDetail(props) {
   }, []);
 
   useLayoutEffect(() => {
-    console.log(size);
     function updateSize() {
-      setSize([window.innerWidth, window.innerHeight]);
+      setSize([ window.innerWidth, window.innerHeight ]);
     }
+
     window.addEventListener('resize', updateSize);
     updateSize();
-
-    console.log('222', size[0], slideIndex);
 
     const trans = `translate3d(-${size[0] * (slideIndex)}px, 0px, 0px)`;
     setSlidTrans(trans);
 
     return () => window.removeEventListener('resize', updateSize);
   }, [size[0]]);
-
-
-
 
   useEffect(() => {
     console.log(tripDetail);
@@ -59,13 +55,9 @@ export default function TripDetail(props) {
     }
   }, [size[0]]);
 
-
-
   useEffect(() => {
     setError(error);
   }, [errorMessage]);
-
-  let currIndex = 0;
 
   const handleShowModalClick = index => {
     setIsModalShow(true);
@@ -98,6 +90,22 @@ export default function TripDetail(props) {
     }
   };
 
+  const copyToClipboard = () => {
+    const dummy = document.createElement('input');
+    const url = window.location.href;
+
+    document.body.appendChild(dummy);
+    dummy.value = url;
+    dummy.select();
+    document.execCommand('copy');
+    document.body.removeChild(dummy);
+
+    setShareButton('share-button-active');
+  };
+
+  const restoreShare = () => {
+    setShareButton('share-button');
+  };
 
 
 
@@ -127,6 +135,17 @@ export default function TripDetail(props) {
         title='상세보기'
         history={history}
       />
+
+      <div>
+        <button type='button' className={shareButton} onClick={copyToClipboard} onMouseOut={restoreShare}>share</button>
+        {/* {
+          copySuccess ?
+          <div style={{"color": "green"}}>
+            Copied!
+          </div> : null
+        } */}
+      </div>
+
 
       {
         tripDetail ? (
