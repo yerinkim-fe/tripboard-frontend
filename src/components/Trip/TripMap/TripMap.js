@@ -126,7 +126,7 @@ export default function TripMap(props) {
         lng: lngValue
       });
     } else {
-      setError('검색결과에서 선택해주세요.');
+      setError('검색결과에서 선택하거나 마커를 이동하여 선택해주세요.');
     }
   };
 

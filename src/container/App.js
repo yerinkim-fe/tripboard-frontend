@@ -60,7 +60,7 @@ const mapDispatchToProps = dispatch => {
       } else {
         dispatch(setError(res.data.message));
       }
-    },
+    }
   };
 };
 

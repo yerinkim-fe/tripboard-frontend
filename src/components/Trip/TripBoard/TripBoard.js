@@ -10,10 +10,6 @@ export default function TripBoard(props) {
   const [ isList, setIsList ] = useState(false);
   const [ error, setError ] = useState('');
 
-  console.log(user);
-
-  console.log(trip);
-
   let lat = 37.566682;
   let lng = 126.978382;
 

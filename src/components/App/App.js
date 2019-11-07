@@ -4,10 +4,11 @@ import SignIn from '../Auth/SignIn/SignIn';
 import SignUp from '../Auth/SignUp/SignUp';
 import TripBoard from '../Trip/TripBoard/TripBoard';
 import TripNew from '../Trip/TripNew/TripNew';
+import TripDetail from '../Trip/TripDetail/TripDetail';
 import './App.scss';
 
 export default function App(props) {
-  const { onConfirmUser, isAuthenticated, user, onSignIn, onSignOut, onTripLoad, trip, errorMessage } = props;
+  const { onConfirmUser, isAuthenticated, user, onSignIn, onSignOut, onTripLoad, trip, tripDetail, onTripDetailLoad, errorMessage } = props;
 
   useEffect(() => {
     if (localStorage.jwtToken) {
@@ -38,6 +39,7 @@ export default function App(props) {
               return <Redirect to='/' />;
             } else {
               return <SignUp
+                errorMessage={errorMessage}
               />
             }
           }}
@@ -71,6 +73,19 @@ export default function App(props) {
             } else {
               return <Redirect to='/signin' />;
             }
+          }}
+        />
+        <Route
+          exact path='/:trip_id'
+          render={routeProps => {
+            // console.log(routeProps.match.params.trip_id);
+            // console.log(trip);
+            // const tripDetail = trip.find(id => id === Number(routeProps.match.params.trip_id));
+            // console.log('aaa', tripDetail);
+            return <TripDetail
+              {...routeProps}
+              errorMessage={errorMessage}
+            />
           }}
         />
       </Switch>

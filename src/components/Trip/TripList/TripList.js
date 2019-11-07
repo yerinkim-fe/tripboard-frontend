@@ -7,11 +7,15 @@ export default function TripList(props) {
   const { trip } = props;
   const [ error, setError ] = useState('');
 
+  useEffect(() => {
+    setError(error);
+  }, [error]);
+
   const tripList = trip.map((trip, index) => {
     return (
       <li key={index}>
         <Link to={`/${trip._id}`}>
-          <h2>{trip.sdate} - {trip.edate}</h2>
+          <h3>{trip.sdate} - {trip.edate}</h3>
           <p>
             {trip.title}
           </p>

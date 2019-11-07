@@ -9,7 +9,7 @@ import { uploadFile, createTrip } from '../../../api';
 import './TripNew.scss';
 
 export default function TripNew(props) {
-  const { user, history } = props;
+  const { user, errorMessage, history } = props;
   const [ error, setError ] = useState('');
   const [ sdate, setSdate ] = useState(new Date());
   const [ edate, setEdate ] = useState(new Date());
@@ -18,10 +18,9 @@ export default function TripNew(props) {
   const [ isMap, setIsMap ] = useState(false);
   const [ createSuccess, setCreateSuccess ] = useState(false);
 
-
   useEffect(() => {
     setError(error);
-  }, [error]);
+  }, [errorMessage]);
 
   const [userInput, setUserInput] = useReducer((state, newState) => ({...state, ...newState}), {
     title: '',
@@ -58,20 +57,25 @@ export default function TripNew(props) {
   const handleFilePost = async e => {
     const formData = new FormData();
 
-    for (let i = 0; i < userInput.file.length ; i++) {
-      formData.append('photos', userInput.file[i]);
-    }
-
-    const res = await uploadFile(formData);
-
-    if (res.status === 200) {
-      const photoUrl = [];
-
-      for (let i = 0; i < res.data.photos.length; i++) {
-        photoUrl.push({ url: res.data.photos[i] })
+    if (userInput.file.length > 10) {
+      setError('사진은 10개까지 등록가능합니다');
+      return false;
+    } else {
+      for (let i = 0; i < userInput.file.length ; i++) {
+        formData.append('photos', userInput.file[i]);
       }
 
-      setUrl(photoUrl);
+      const res = await uploadFile(formData);
+
+      if (res.status === 200) {
+        const photoUrl = [];
+
+        for (let i = 0; i < res.data.photos.length; i++) {
+          photoUrl.push({ url: res.data.photos[i] })
+        }
+
+        setUrl(photoUrl);
+      }
     }
 
   };
@@ -190,7 +194,7 @@ export default function TripNew(props) {
           <button type='button' onClick={handleShowMapClick}>검색</button>
         </label>
         <label>
-          <span>pictures</span>
+          <span>pictures(한번에 최대 10개 파일 등록 가능합니다)</span>
           <input
             type="file"
             name="file"

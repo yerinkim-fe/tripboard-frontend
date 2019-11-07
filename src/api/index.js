@@ -60,3 +60,12 @@ export const getTrip = async userId => {
     return err.response;
   }
 };
+
+export const getTripDetail = async tripId => {
+  try {
+    const res = await axios.get(`/api/trips/${tripId}`);
+    return res;
+  } catch (err) {
+    return err.response;
+  }
+};
