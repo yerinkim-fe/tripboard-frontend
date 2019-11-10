@@ -77,7 +77,6 @@ export default function TripNew(props) {
         setUrl(photoUrl);
       }
     }
-
   };
 
   const handleSubmit = async e => {

@@ -50,22 +50,22 @@ export default function TripMap(props) {
   const getCountry = addressArray => {
     let country = '';
 
-    for( let i = 0; i < addressArray.length; i++ ) {
-      if ( addressArray[ i ].types[0] && 'country' === addressArray[ i ].types[0] ) {
-        country = addressArray[ i ].long_name;
+    for (let i = 0; i < addressArray.length; i++) {
+      if (addressArray[i].types[0] && 'country' === addressArray[i].types[0]) {
+        country = addressArray[i].long_name;
         return country;
       }
     }
   };
 
   const getCity = addressArray => {
-    let state = '';
+    let city = '';
 
-    for( let i = 0; i < addressArray.length; i++ ) {
-      for( let i = 0; i < addressArray.length; i++ ) {
-        if ( addressArray[ i ].types[0] && ('locality' === addressArray[ i ].types[0] || 'administrative_area_level_1' === addressArray[ i ].types[0]) ) {
-          state = addressArray[ i ].long_name;
-          return state;
+    for (let i = 0; i < addressArray.length; i++) {
+      for (let i = 0; i < addressArray.length; i++) {
+        if (addressArray[i].types[0] && ('locality' === addressArray[i].types[0] || 'administrative_area_level_1' === addressArray[i].types[0])) {
+          city = addressArray[i].long_name;
+          return city;
         }
       }
     }

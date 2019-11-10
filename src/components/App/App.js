@@ -5,6 +5,7 @@ import SignUp from '../Auth/SignUp/SignUp';
 import TripBoard from '../Trip/TripBoard/TripBoard';
 import TripNew from '../Trip/TripNew/TripNew';
 import TripDetail from '../Trip/TripDetail/TripDetail';
+import TripChart from '../Trip/TripChart/TripChart';
 import './App.scss';
 
 export default function App(props) {
@@ -76,12 +77,23 @@ export default function App(props) {
           }}
         />
         <Route
+          exact path='/chart'
+          render={routeProps => {
+            if (isAuthenticated) {
+              return <TripChart
+                {...routeProps}
+                onTripLoad={onTripLoad}
+                trip={trip}
+                user={user}
+              />
+            } else {
+              return <Redirect to='/signin' />;
+            }
+          }}
+        />
+        <Route
           exact path='/:trip_id'
           render={routeProps => {
-            // console.log(routeProps.match.params.trip_id);
-            // console.log(trip);
-            // const tripDetail = trip.find(id => id === Number(routeProps.match.params.trip_id));
-            // console.log('aaa', tripDetail);
             return <TripDetail
               {...routeProps}
               errorMessage={errorMessage}

@@ -1,9 +1,17 @@
 import { combineReducers } from 'redux';
 import * as types from "../constants/actionTypes";
 
+const isToken = () => {
+  if (localStorage.jwtToken) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 const initialState = {
-  isAuthenticated: false,
-  user: {},
+  isAuthenticated: isToken(),
+  user: null,
   trip: [],
   errorMessage: ''
 };

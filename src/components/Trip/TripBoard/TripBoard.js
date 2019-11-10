@@ -27,8 +27,10 @@ export default function TripBoard(props) {
   });
 
   useEffect(() => {
-    onTripLoad(user.user_id);
-  }, []);
+    if (!trip.length && user) {
+      onTripLoad(user.user_id);
+    }
+  }, [user]);
 
   useEffect(() => {
     if (trip.length > 0) {
