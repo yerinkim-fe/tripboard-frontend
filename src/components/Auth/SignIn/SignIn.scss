@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400|Roboto+Slab:400&display=swap');
+$assetPath : "../../../images";
+
+.signin {
+  width: 100vw;
+  min-height: 100vh;
+  background: #F6F6F6 url(#{$assetPath}/main.png) no-repeat right bottom;
+  background-size: 50vh;
+
+  .auth {
+    position: absolute;
+    width: 100vw;
+    box-sizing: border-box;
+    padding: 10rem 4rem 0;
+    text-align: center;
+    z-index: 1;
+
+    h1 {
+      font-family: 'Roboto Slab', serif;
+      font-size: 3.5rem;
+      font-weight: bold;
+    }
+
+    .desc {
+      margin: 1rem 0 6rem;
+      font-family: 'Open Sans', serif;
+      font-size: 1.6rem;
+      color: #a5a5a5;
+    }
+
+    .account {
+      font-size: 1.4rem;
+      color: rgb(145, 145, 145);
+
+      a {
+        color: #54D3C2;
+        font-weight: bold;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

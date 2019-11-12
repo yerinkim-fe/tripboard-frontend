@@ -102,18 +102,20 @@ export default function TripBoard(props) {
 
   return (
     <div className='container'>
-      <div className='header'>
-        <h1>트립보드 메인</h1>
-        <button type='button' onClick={handleSignOut}>Sign out</button>
-        <button type='button' onClick={handleShowListClick}>리스트로 보기</button>
+      <header>
+        <h1>Trip Board</h1>
+        <button type='button' className='button-list' onClick={handleShowListClick}></button>
+        <button type='button' className='button-signout' onClick={handleSignOut}></button>
 
-        <Link to='/new'>+</Link>
-        <Link to='/chart'>chart</Link>
+        <Link to='/chart' className='button-chart'></Link>
 
-      </div>
+      </header>
 
 
       {map}
+
+      <Link to='/new' className='button-plus'></Link>
+
 
       {
         isList &&

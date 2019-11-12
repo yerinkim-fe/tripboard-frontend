@@ -1,8 +1,49 @@
-.header {
-  position: absolute;
-  top: 0;
-  width: 100vw;
-  height: 100px;
-  z-index: 1;
+@import '../../App/base.scss';
 
+header {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.button-list {
+  position: absolute;
+  left: 1.7rem;
+  top: 1.7rem;
+  background: url(#{$assetPath}/list.png) no-repeat 0 0;
+  background-size: cover;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.button-chart {
+  position: absolute;
+  right: 5.5rem;
+  top: 1.7rem;
+  background: url(#{$assetPath}/pie-chart.png) no-repeat 0 0;
+  background-size: cover;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+
+.button-signout {
+  position: absolute;
+  right: 1.7rem;
+  top: 1.7rem;
+  background: url(#{$assetPath}/logout.png) no-repeat 0 0;
+  background-size: cover;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.button-plus {
+  position: absolute;
+  right: 3rem;
+  bottom: 3rem;
+  border-radius: 5rem;
+  background: url(#{$assetPath}/add.png) no-repeat 0 0;
+  background-size: cover;
+  width: 5rem;
+  height: 5rem;
 }

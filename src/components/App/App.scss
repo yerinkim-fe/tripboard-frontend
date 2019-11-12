@@ -1,18 +1,69 @@
-body {
-  margin: 0;
+@import 'Reset.scss';
+@import './base.scss';
 
-  ul {
-    margin: 0;
-    padding: 0;
+html {
+  font-size: 10px;
 
-    li {
-      list-style: none;
+  body {
+    .container {
+      width: 100vw;
+      height: 100vh;
+      background: $bg-color;
+      margin: 0 auto;
+    }
+
+    form {
+      input[type=text],
+      input[type=email],
+      input[type=password],
+      input[type=submit] {
+        display: block;
+        box-sizing: border-box;
+        width: 100%;
+        margin: 2rem 0;
+        border-radius: 3rem;
+        background: #fff;
+        padding: 1.5rem 2rem;
+        border: none;
+        box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        color: rgb(145, 145, 145);
+        font-size: 1.4rem;
+      }
+
+      input[type=submit] {
+        margin: 5rem 0;
+        background: $primary-color;
+        color: #fff;
+      }
+    }
+
+    header {
+      // position: absolute;
+      // left: 0;
+      // top: 0;
+      width: 100vw;
+      height: 60px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      z-index: 1;
+
+      .button-back {
+        position: absolute;
+        left: 0;
+        top: 0.5rem;
+        font-size: 2rem;
+        width: 5rem;
+        height: 5rem;
+      }
+
+      h1 {
+        position: absolute;
+        top: 1.7rem;
+        font-family: 'Roboto Slab', serif;
+        font-size: 2rem;
+        text-align: center;
+      }
     }
   }
-
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
 }

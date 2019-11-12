@@ -70,7 +70,6 @@ export default function TripDetail(props) {
     setIsModalShow(false);
   };
 
-
   const handleSlidePrevClick = () => {
     console.log('prev', slideIndex);
     if (slideIndex > 0) {

@@ -35,11 +35,12 @@ export default function App(props) {
         />
         <Route
           exact path='/signup'
-          render={() => {
+          render={routeProps => {
             if (isAuthenticated) {
               return <Redirect to='/' />;
             } else {
               return <SignUp
+                {...routeProps}
                 errorMessage={errorMessage}
               />
             }

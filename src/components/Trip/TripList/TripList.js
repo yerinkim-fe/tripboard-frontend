@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Error from '../../Error/Error'
+import Error from '../../Error/Error';
+import getDateFormat from '../../../utils/getDateFormat';
 import './TripList.scss';
 
 export default function TripList(props) {
@@ -15,11 +16,11 @@ export default function TripList(props) {
     return (
       <li key={index}>
         <Link to={`/${trip._id}`}>
-          <h3>{trip.sdate} - {trip.edate}</h3>
-          <p>
+          <p className='date'>{getDateFormat(trip.sdate)} - {getDateFormat(trip.edate)}</p>
+          <p className='title'>
             {trip.title}
           </p>
-          <p>
+          <p className='place'>
             {trip.address.city}, {trip.address.country}
           </p>
         </Link>
@@ -29,13 +30,15 @@ export default function TripList(props) {
 
   return (
     <div className='trip-list'>
-      {
-        tripList.length > 0 ?
-        <ul>{tripList}</ul> :
-        null
-      }
+      <div className='inner'>
+        {
+          tripList.length > 0 ?
+          <ul>{tripList}</ul> :
+          null
+        }
+      </div>
 
-      <button type='button' className='button-list-hide' onClick={props.onHideListClick}>X</button>
+      <button type='button' className='button-close' onClick={props.onHideListClick}></button>
 
       {
         error &&

@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import { Link } from 'react-router-dom';
 import { normalizeEmail, isLength } from 'validator';
-import Error from '../../Error/Error'
+import Error from '../../Error/Error';
+import './SignIn.scss';
 
 export default function SignIn(props) {
   const { onSignIn, errorMessage } = props;
@@ -53,37 +54,42 @@ export default function SignIn(props) {
   };
 
   return (
-    <div className='auth'>
-      <h1>로그인</h1>
+    <div className='signin'>
+      <div className='auth'>
+        <h1>TRIP BOARD</h1>
+        <p className='desc'>Manage your trip</p>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type='email'
-          name='email'
-          placeholder='email'
-          value={userInput.email}
-          onChange={handleChange}
-        />
-        <input
-          type='password'
-          name='password'
-          placeholder='password'
-          value={userInput.password}
-          onChange={handleChange}
-        />
+        <form onSubmit={handleSubmit}>
+          <input
+            type='email'
+            name='email'
+            placeholder='email'
+            value={userInput.email}
+            onChange={handleChange}
+          />
+          <input
+            type='password'
+            name='password'
+            placeholder='password'
+            value={userInput.password}
+            onChange={handleChange}
+          />
 
-        <input type='submit' value='SIGN IN' />
-      </form>
+          <input type='submit' value='SIGN IN' />
+        </form>
 
-      <Link to={'/signup'}>회원가입</Link>
+        <p className='account'>Don't have an account? <Link to={'/signup'}>Sign up</Link></p>
 
 
-      {
-        error &&
-        <Error
-          message={error}
-        />
-      }
+        {
+          error &&
+          <Error
+            message={error}
+          />
+        }
+
+      </div>
+      {/* <div className='earth'></div> */}
 
     </div>
   );

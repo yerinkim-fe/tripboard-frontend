@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import { Redirect } from 'react-router-dom';
-import Error from '../../Error/Error'
-import Header from '../../App/Header'
+import Error from '../../Error/Error';
+import Header from '../../App/Header';
 import TripMap from '../TripMap/TripMap';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -142,84 +142,87 @@ export default function TripNew(props) {
         history={history}
       />
 
-      <form onSubmit={handleSubmit}>
-        <label>
-          <span>제목</span>
-          <input
-            type='text'
-            name='title'
-            value={userInput.title}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          <span>여행기간</span>
-          <DatePicker
-            name='sdate'
-            selected={sdate}
-            onChange={date => setSdate(date)}
-            selectsStart
-            sdate={sdate}
-            edate={edate}
-            peekNextMonth
-            showMonthDropdown
-            showYearDropdown
-            dropdownMode="select"
-            dateFormatCalendar={"MMM yyyy"}
-          />
-          <DatePicker
-            name='edate'
-            selected={edate}
-            onChange={date => setEdate(date)}
-            selectsEnd
-            edate={edate}
-            minDate={sdate}
-            peekNextMonth
-            showMonthDropdown
-            showYearDropdown
-            dropdownMode="select"
-            dateFormatCalendar={"MMM yyyy"}
-          />
-        </label>
-        <label>
-          <span>여행지</span>
-          <input
-            type='text'
-            name='location'
-            value={userInput.location}
-            onChange={handleChange}
-            readOnly
-          />
-          <button type='button' onClick={handleShowMapClick}>검색</button>
-        </label>
-        <label>
-          <span>pictures(한번에 최대 10개 파일 등록 가능합니다)</span>
-          <input
-            type="file"
-            name="file"
-            onChange={handleChange}
-            multiple
-          />
-          <button type="button" onClick={handleFilePost}>file upload</button>
+      <div className='add-place'>
+
+        <form onSubmit={handleSubmit}>
+          <label>
+            <span>제목</span>
+            <input
+              type='text'
+              name='title'
+              value={userInput.title}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            <span>여행기간</span>
+            <DatePicker
+              name='sdate'
+              selected={sdate}
+              onChange={date => setSdate(date)}
+              selectsStart
+              sdate={sdate}
+              edate={edate}
+              peekNextMonth
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"
+              dateFormatCalendar={"MMM yyyy"}
+            />
+            <DatePicker
+              name='edate'
+              selected={edate}
+              onChange={date => setEdate(date)}
+              selectsEnd
+              edate={edate}
+              minDate={sdate}
+              peekNextMonth
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"
+              dateFormatCalendar={"MMM yyyy"}
+            />
+          </label>
+          <label>
+            <span>여행지</span>
+            <input
+              type='text'
+              name='location'
+              value={userInput.location}
+              onChange={handleChange}
+              readOnly
+            />
+            <button type='button' onClick={handleShowMapClick}>검색</button>
+          </label>
+          <label>
+            <span>pictures(한번에 최대 10개 파일 등록 가능합니다)</span>
+            <input
+              type="file"
+              name="file"
+              onChange={handleChange}
+              multiple
+            />
+            <button type="button" onClick={handleFilePost}>file upload</button>
 
 
-        </label>
-        {
-          photoList.length > 0 ?
-          <ul>{photoList}</ul> :
-          null
-        }
-        <label>
-          <span>description</span>
-          <textarea
-            name='description'
-            value={userInput.description}
-            onChange={handleChange}
-          />
-        </label>
+          </label>
+          {
+            photoList.length > 0 ?
+            <ul>{photoList}</ul> :
+            null
+          }
+          <label>
+            <span>description</span>
+            <textarea
+              name='description'
+              value={userInput.description}
+              onChange={handleChange}
+            />
+          </label>
 
-        <input type='submit' value='등록' />
-      </form>
+          <input type='submit' value='등록' />
+        </form>
+      </div>
 
       {
         isMap &&
