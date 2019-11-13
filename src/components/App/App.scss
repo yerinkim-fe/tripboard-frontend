@@ -1,10 +1,12 @@
 @import 'Reset.scss';
 @import './base.scss';
+$assetPath : "../../images";
 
 html {
   font-size: 10px;
 
   body {
+    background: #F6F6F6;
     .container {
       width: 100vw;
       height: 100vh;
@@ -16,31 +18,26 @@ html {
       input[type=text],
       input[type=email],
       input[type=password],
-      input[type=submit] {
-        display: block;
-        box-sizing: border-box;
-        width: 100%;
-        margin: 2rem 0;
-        border-radius: 3rem;
-        background: #fff;
-        padding: 1.5rem 2rem;
-        border: none;
-        box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.1);
-        color: rgb(145, 145, 145);
-        font-size: 1.4rem;
+      input[type=submit],
+      input[type=file],
+      textarea {
+        @include input-default;
+      }
+
+      input[type=text]:read-only {
+        background: #eee;
       }
 
       input[type=submit] {
-        margin: 5rem 0;
-        background: $primary-color;
-        color: #fff;
+        @include input-primary;
+      }
+
+      textarea {
+        height: 10rem;
       }
     }
 
     header {
-      // position: absolute;
-      // left: 0;
-      // top: 0;
       width: 100vw;
       height: 60px;
       display: flex;
@@ -50,20 +47,37 @@ html {
 
       .button-back {
         position: absolute;
-        left: 0;
-        top: 0.5rem;
-        font-size: 2rem;
-        width: 5rem;
-        height: 5rem;
+        left: 1.5rem;
+        top: 1.7rem;
+        background: url(#{$assetPath}/back.png) no-repeat 0 0;
+        background-size: cover;
+        width: 2.5rem;
+        height: 2.5rem;
       }
 
       h1 {
         position: absolute;
         top: 1.7rem;
-        font-family: 'Roboto Slab', serif;
+        font-family: 'Roboto Slab', 'Nanum Myeongjo', serif;
         font-size: 2rem;
         text-align: center;
+        font-weight: bold;
       }
+    }
+
+    .button-close {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      background: url(#{$assetPath}/close.png) no-repeat 0 0;
+      background-size: cover;
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    .gmnoprint,
+    .gm-fullscreen-control {
+      display: none;
     }
   }
 }

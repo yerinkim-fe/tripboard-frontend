@@ -13,7 +13,13 @@ export default function SignUp(props) {
 
   useEffect(() => {
     setError(errorMessage);
+    setTimeout(() => setError(''), 3000);
   }, [errorMessage]);
+
+  useEffect(() => {
+    setError(error);
+    setTimeout(() => setError(''), 3000);
+  }, [error]);
 
   const [userInput, setUserInput] = useReducer((state, newState) => ({...state, ...newState}), {
     email: '',
@@ -120,15 +126,14 @@ export default function SignUp(props) {
         </form>
 
         <p className='account'>Already have an account? <Link to={'/signin'}>Sign in</Link></p>
-
-        {
-          error &&
-          <Error
-            message={error}
-          />
-        }
-
       </div>
+
+      {
+        error &&
+        <Error
+          message={error}
+        />
+      }
     </div>
 
   );

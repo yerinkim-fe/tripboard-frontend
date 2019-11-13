@@ -14,7 +14,7 @@
   .inner {
     height: 100vh;
     overflow: auto;
-    padding: 3rem 4rem 0;
+    padding: 3rem 4rem;
 
     ul {
       li {
@@ -24,10 +24,15 @@
           display: block;
           position: relative;
           background: #fff;
-          box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.1);
           border-radius: 1rem;
+          border: 1px solid #eee;
           padding: 2rem 3rem 2rem 8.5rem;
           text-decoration: none;
+          transition: box-shadow .3s;
+
+          &:hover {
+            box-shadow: 0 0 11px rgba(33,33,33,.2);
+          }
 
           &:before {
             content: '';
@@ -63,17 +68,6 @@
       }
     }
   }
-
-  .button-close {
-    position: absolute;
-    right: 1.7rem;
-    top: 1.7rem;
-    background: url(#{$assetPath}/close.png) no-repeat 0 0;
-    background-size: cover;
-    width: 2.5rem;
-    height: 2.5rem;
-  }
-
 }
 
 @keyframes slide-right {

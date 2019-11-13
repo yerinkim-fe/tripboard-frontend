@@ -6,7 +6,7 @@ export default function Modal(props) {
 
   return (
     <div className='modal'>
-      <button type='button' onClick={onHideModalClick}>x</button>
+      <button type='button' className='button-close' onClick={onHideModalClick}></button>
       {children}
     </div>
   );

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
-import Geocode from "react-geocode";
+import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+import Geocode from 'react-geocode';
 import Autocomplete from 'react-google-autocomplete';
-import Error from '../../Error/Error'
+import Error from '../../Error/Error';
 import './TripMap.scss';
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLEMAP_APIKEY);
-Geocode.setLanguage("ko");
+Geocode.setLanguage('ko');
 Geocode.enableDebug();
 
 export default function TripMap(props) {
@@ -145,13 +145,6 @@ export default function TripMap(props) {
         onDragEnd={ onMarkerDragEnd }
         position={{ lat: markerPosition.lat, lng: markerPosition.lng }}
       />
-
-      <Autocomplete
-        className='auto-complete'
-        onPlaceSelected={ onPlaceSelected }
-        types={['(regions)']}
-        placeholder={address}
-      />
     </GoogleMap>
   ));
 
@@ -169,10 +162,17 @@ export default function TripMap(props) {
   }
 
   return (
-    <div>
+    <div className='wrap-map'>
       {map}
 
-      <button type='button' className='button-map-hide' onClick={props.onHideMapClick}>X</button>
+      <Autocomplete
+        className='auto-complete'
+        onPlaceSelected={ onPlaceSelected }
+        types={['(regions)']}
+        placeholder={address}
+      />
+
+      <button type='button' className='button-close' onClick={props.onHideMapClick}></button>
 
       <button type='button' className='button-map-save' onClick={onSavePlaceClick}>선택완료</button>
 

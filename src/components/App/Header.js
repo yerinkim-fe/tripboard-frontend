@@ -10,7 +10,7 @@ export default function TripNew(props) {
   return (
     <header>
       <h1>{title}</h1>
-      <button type='button' className='button-back' onClick={handleBack}>←</button>
+      <button type='button' className='button-back' onClick={handleBack}></button>
     </header>
   );
 }

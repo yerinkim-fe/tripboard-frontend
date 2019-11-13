@@ -11,17 +11,6 @@ export default function TripChart(props) {
   const [ dataDoughnut, setDataDoughnut ] = useState();
   const [ dataBar, setDataBar ] = useState();
 
-
-// address: {country: "조선민주주의인민공화국", city: "평양"}
-// created_by: "5db9b960e5565e30b96ca966"
-// description: ""
-// edate: "2019-11-06T07:59:19.334Z"
-// location: {coordinates: Array(2), type: "Point"}
-// pictures: [{…}]
-// sdate: "2019-11-06T07:59:19.334Z"
-// title: "평양"
-// __v: 0
-// _id: "5dc27dadb8e5c5644201297a"
   useEffect(() => {
     if (!trip.length && user) {
       onTripLoad(user.user_id);
@@ -31,7 +20,6 @@ export default function TripChart(props) {
   useEffect(() => {
 
     if (trip.length) {
-
       const year = {}
       const month = {}
       const place = {}
@@ -62,11 +50,6 @@ export default function TripChart(props) {
         }
       });
 
-
-      console.log('month', month);
-      console.log('year', year);
-      console.log('place', place);
-
       const yearData = {
         labels: Object.keys(year),
         datasets: [
@@ -83,19 +66,39 @@ export default function TripChart(props) {
       };
       setDataBar(yearData);
 
+      const mm = Object.keys(month).map(mm => `${Number(mm) + 1}월`);
+
       const monthData = {
-        labels: Object.keys(month),
+        labels: mm,
         datasets: [{
           data: Object.values(month),
           backgroundColor: [
-          '#FF6384',
-          '#36A2EB',
-          '#FFCE56'
+            '#47ACB1',
+            '#F36422',
+            '#542823',
+            '#286B4F',
+            '#676766',
+            '#C9212A',
+            '#95247A',
+            '#ADD5D6',
+            '#F9AA7B',
+            '#232F49',
+            '#FFCD34',
+            '#6CE3D5',
           ],
           hoverBackgroundColor: [
-          '#FF6384',
-          '#36A2EB',
-          '#FFCE56'
+            '#47ACB1',
+            '#F36422',
+            '#542823',
+            '#286B4F',
+            '#676766',
+            '#C9212A',
+            '#95247A',
+            '#ADD5D6',
+            '#F9AA7B',
+            '#232F49',
+            '#FFCD34',
+            '#6CE3D5',
           ]
         }],
       };
@@ -131,56 +134,60 @@ export default function TripChart(props) {
     }
   }, [trip]);
 
-  console.log(trip);
-
-
   return (
     <div className='container'>
       <Header
-        title='chart'
+        title='Chart'
         history={history}
       />
 
       {
         dataBar &&
 
-        <div>
-          <Bar
-            data={dataBar}
-            // width={100}
-            // height={50}
-            // options={{
-            //   maintainAspectRatio: false
-            // }}
-          />
+        <div className='chart'>
+          <div className='item'>
+            <h3>연도별 여행일수</h3>
+            <Bar
+              data={dataBar}
+              // width={100}
+              // height={50}
+              // options={{
+              //   maintainAspectRatio: false
+              // }}
+            />
+          </div>
 
+          <div className='item'>
+            <h3>월별 여행일수</h3>
+            <Doughnut
+              data={dataDoughnut}
+              options={{
+                responsive: true,
+                maintainAspectRatio: true,
+              }}
+            />
+          </div>
 
-          <Doughnut
-            data={dataDoughnut}
-            options={{
-              responsive: true,
-              maintainAspectRatio: true,
-            }}
-          />
-
-
-          <Line
-            data={dataLine}
-            // options={{
-            //   title: {
-            //     display: true,
-            //     text:'Average per month',
-            //     fontSize:20
-            //   },
-            //   legend: {
-            //     display: true,
-            //     position:'right'
-            //   },
-            //   tooltip: true,
-            //   responsive: true,
-            //   // maintainAspectRatio: false
-            // }}
-          />
+          <div className='item'>
+            <h3>여행지별 방문횟수</h3>
+            <Line
+              data={dataLine}
+              // options={{
+              //   title: {
+              //     display: true,
+              //     text:'Average per month',
+              //     fontSize:20
+              //   },
+              //   legend: {
+              //     display: true,
+              //     position:'right'
+              //   },
+              //   tooltip: true,
+              //   responsive: true,
+              //   // maintainAspectRatio: false
+              // }}
+            />
+          </div>
         </div>
       }
     </div>

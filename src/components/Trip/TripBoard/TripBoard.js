@@ -94,7 +94,13 @@ export default function TripBoard(props) {
 
   useEffect(() => {
     setError(errorMessage);
+    setTimeout(() => setError(''), 3000);
   }, [errorMessage]);
+
+  useEffect(() => {
+    setError(error);
+    setTimeout(() => setError(''), 3000);
+  }, [error]);
 
   const handleSignOut = () => {
    onSignOut();
@@ -102,7 +108,7 @@ export default function TripBoard(props) {
 
   return (
     <div className='container'>
-      <header>
+      <header className='main'>
         <h1>Trip Board</h1>
         <button type='button' className='button-list' onClick={handleShowListClick}></button>
         <button type='button' className='button-signout' onClick={handleSignOut}></button>

@@ -1,19 +1,21 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-import Error from '../../Error/Error'
-import Header from '../../App/Header'
+import Error from '../../Error/Error';
+import Header from '../../App/Header';
 import Modal from '../Modal/Modal';
 import { getTripDetail } from '../../../api';
+import getDateFormat from '../../../utils/getDateFormat';
 import './TripDetail.scss';
 
 export default function TripDetail(props) {
   const { errorMessage, history, match } = props;
-  const [ shareButton, setShareButton ] = useState('share-button');
   const [ tripDetail, setTripDetail ] = useState('');
   const [ isModalShow, setIsModalShow ] = useState(false);
   const [ size, setSize ] = useState([0, 0]);
   const [ slideWidth, setSlideWidth ] = useState('');
   const [ slideTrans, setSlidTrans ] = useState('');
   const [ slideIndex, setSlidIndex ] = useState(0);
+  const [ slideLeft, setSlideLeft ] = useState(false);
+  const [ slideRight, setSlideRight ] = useState(false);
   const [ error, setError ] = useState('');
 
   const getTrip = async () => {
@@ -40,7 +42,6 @@ export default function TripDetail(props) {
   }, [size[0]]);
 
   useEffect(() => {
-    console.log(tripDetail);
     if (tripDetail) {
       const listWidth = tripDetail.pictures.length * size[0];
       setSlideWidth(listWidth);
@@ -48,7 +49,6 @@ export default function TripDetail(props) {
   }, [tripDetail]);
 
   useEffect(() => {
-    console.log(tripDetail);
     if (tripDetail) {
       const listWidth = tripDetail.pictures.length * size[0];
       setSlideWidth(listWidth);
@@ -56,13 +56,38 @@ export default function TripDetail(props) {
   }, [size[0]]);
 
   useEffect(() => {
-    setError(error);
+    setError(errorMessage);
+    setTimeout(() => setError(''), 3000);
   }, [errorMessage]);
 
-  const handleShowModalClick = index => {
+  useEffect(() => {
+    setError(error);
+    setTimeout(() => setError(''), 3000);
+  }, [error]);
+
+  const checkSlideIndex = slideIndex => {
+    console.log(slideIndex, tripDetail.pictures.length);
+    if (tripDetail.pictures.length > 1) {
+      setSlideRight(true);
+      setSlideLeft(true);
+
+      if (slideIndex === 0) {
+        setSlideLeft(false);
+      } else if (slideIndex === tripDetail.pictures.length - 1) {
+        setSlideRight(false);
+      }
+    } else {
+      setSlideLeft(false);
+      setSlideRight(false);
+    }
+  }
+
+  const handleShowModalClick = slideIndex => {
+    checkSlideIndex(slideIndex);
+
     setIsModalShow(true);
-    setSlidIndex(index);
-    const trans = `translate3d(-${size[0] * (index)}px, 0px, 0px)`;
+    setSlidIndex(slideIndex);
+    const trans = `translate3d(-${size[0] * (slideIndex)}px, 0px, 0px)`;
     setSlidTrans(trans);
   };
 
@@ -71,22 +96,24 @@ export default function TripDetail(props) {
   };
 
   const handleSlidePrevClick = () => {
-    console.log('prev', slideIndex);
     if (slideIndex > 0) {
       const trans = `translate3d(-${size[0] * (slideIndex - 1)}px, 0px, 0px)`;
       setSlidTrans(trans);
       setSlidIndex(slideIndex - 1);
     }
+
+    checkSlideIndex(slideIndex - 1);
   };
 
   const handleSlideNextClick = () => {
-    console.log('next', slideIndex);
-
     if (slideIndex < tripDetail.pictures.length - 1) {
       const trans = `translate3d(-${size[0] * (slideIndex + 1)}px, 0px, 0px)`;
       setSlidTrans(trans);
       setSlidIndex(slideIndex + 1);
+      setSlideRight(true);
     }
+
+    checkSlideIndex(slideIndex + 1);
   };
 
   const copyToClipboard = () => {
@@ -99,33 +126,26 @@ export default function TripDetail(props) {
     document.execCommand('copy');
     document.body.removeChild(dummy);
 
-    setShareButton('share-button-active');
+    setError('Copied!');
   };
-
-  const restoreShare = () => {
-    setShareButton('share-button');
-  };
-
-
 
   let pictureList;
   let partOfPicture;
 
-  const LIMIT_PIC = 6;
+  const LIMIT_PIC = 3;
 
   if (tripDetail) {
     partOfPicture = tripDetail.pictures.slice(0, LIMIT_PIC).map((picture, index) => {
       if (tripDetail.pictures.length > LIMIT_PIC && index === LIMIT_PIC - 1) {
-        return <li key={index} onClick={() => {handleShowModalClick(index)}}><div className='last-picture'>+{tripDetail.pictures.length - LIMIT_PIC}</div><img src={picture.url} /></li>
+        return <li key={index} onClick={() => {handleShowModalClick(index)}} style={{ backgroundImage: `url(${picture.url})` }}><div className='last-picture'>+{tripDetail.pictures.length - LIMIT_PIC}</div></li>
       } else {
-        return <li key={index} onClick={() => {handleShowModalClick(index)}}><img src={picture.url} /></li>
+        return <li key={index} onClick={() => {handleShowModalClick(index)}} style={{ backgroundImage: `url(${picture.url})` }}></li>
       }
     });
 
     pictureList = tripDetail.pictures.map((picture, index) => (
       <li key={index} style={{ width: size[0] }}><img src={picture.url} /></li>
     ));
-
   }
 
   return (
@@ -135,43 +155,46 @@ export default function TripDetail(props) {
         history={history}
       />
 
-      <div>
-        <button type='button' className={shareButton} onClick={copyToClipboard} onMouseOut={restoreShare}>share</button>
-        {/* {
-          copySuccess ?
-          <div style={{"color": "green"}}>
-            Copied!
-          </div> : null
-        } */}
-      </div>
-
+      <button type='button' className='button-share' onClick={copyToClipboard}></button>
 
       {
         tripDetail ? (
-          <div className='contents'>
-            <div className='item'>
-              <h3>여행기간</h3>
-              <p>{tripDetail.sdate} - {tripDetail.edate}</p>
+          <>
+            <div className='detail-img' style={{ backgroundImage: `url(${tripDetail.pictures[0].url})` }}></div>
+
+            <div className='trip-detail'>
+              <div className='item'>
+                <h3>여행기간</h3>
+                <p>{getDateFormat(tripDetail.sdate)} - {getDateFormat(tripDetail.edate)}</p>
+              </div>
+              <div className='item'>
+                <h3>제목</h3>
+                <p>{tripDetail.title}</p>
+              </div>
+              <div className='item'>
+                <h3>여행지</h3>
+                <p>
+                  {tripDetail.address.country && tripDetail.address.country}
+                  {tripDetail.address.city && ` ${tripDetail.address.city}`}
+                </p>
+              </div>
+              {
+                tripDetail.description &&
+                <div className='item'>
+                  <h3>설명</h3>
+                  <p>{tripDetail.description}</p>
+                </div>
+              }
+
+              <div className='item'>
+                <ul className='thumbnails'>
+                  {
+                    partOfPicture
+                  }
+                </ul>
+              </div>
             </div>
-            <div className='item'>
-              <h3>제목</h3>
-              <p>{tripDetail.title}</p>
-            </div>
-            <div className='item'>
-              <h3>여행지</h3>
-              <p>{tripDetail.address.city}, {tripDetail.address.country}</p>
-            </div>
-            <div className='item'>
-              <ul className='thumbnails'>
-                {
-                  partOfPicture
-                }
-              </ul>
-            </div>
-            <div className='item'>
-              <p>{tripDetail.description}</p>
-            </div>
-          </div>
+          </>
         ) :
         null
       }
@@ -186,17 +209,15 @@ export default function TripDetail(props) {
                   pictureList
                 }
               </ul>
+
+              {
+                slideLeft && <button type='button' className='button-left' onClick={handleSlidePrevClick}></button>
+              }
+
+              {
+                slideRight && <button type='button' className='button-right' onClick={handleSlideNextClick}></button>
+              }
             </div>
-
-            {
-              tripDetail.pictures.length > 1 ?
-              <div>
-                <button type='button' onClick={handleSlidePrevClick}>←</button>
-                <button type='button' onClick={handleSlideNextClick}>→</button>
-              </div> :
-              null
-            }
-
           </div>
         </Modal>
       }

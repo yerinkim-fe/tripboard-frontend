@@ -1,5 +1,22 @@
 .error {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  width: 90%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+  z-index: 2;
+  // animation: fadeOut 5s linear forwards;
+
+  .error-message {
+    color: #fff;
+    font-size: 1.4rem;
+  }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }

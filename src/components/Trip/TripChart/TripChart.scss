@@ -1,1 +1,14 @@
+@import '../../App/base.scss';
 
+.chart {
+  padding: 2rem;
+
+  .item {
+    padding-bottom: 2rem;
+
+    h3 {
+      font-size: 1.6rem;
+      padding-bottom: 1rem;
+    }
+  }
+}

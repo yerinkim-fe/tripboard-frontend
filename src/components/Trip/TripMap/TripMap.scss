@@ -1,54 +1,37 @@
-.trip-map {
-  width: 100vw;
-  height: 100vh;
-  margin-top: 50px;
-  position: absolute;
-  bottom: -100vh;
-  // bottom: calc(-1 * (100vh));
-  animation: slide-up .5s forwards;
-  // animation-delay: 2s;
+@import '../../App/base.scss';
+
+.wrap-map {
+  .trip-map {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    bottom: -100vh;
+    animation: slide-up .5s forwards;
+
+  }
+
+  .auto-complete {
+    @include input-default;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90vw;
+  }
+
+  .button-map-save {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 2rem;
+    @include input-primary;
+    margin: 0;
+    width: 90vw;
+  }
+
 }
 
 @keyframes slide-up {
   100% { bottom: 0; }
-}
-
-@keyframes slide-down {
-  100% { bottom: -100vh; }
-}
-
-.button-map-hide {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 20px;
-  height: 20px;
-  background: #fff;
-}
-
-.button-map-save {
-  position: absolute;
-  left: 0;
-  bottom: 50px;
-  background: #fff;
-}
-
-.auto-complete {
-  position: absolute;
-  top: 20px;
-  left: 0;
-  width: 100vw;
-  height: 40px;
-  padding-left: 16px;
-  margin-top: 2px;
-  margin-bottom: 100px;
-}
-
-input[type=text]:read-only {
-  background: #ddd;
-}
-
-.gmnoprint,
-.gm-fullscreen-control {
-  display: none;
 }

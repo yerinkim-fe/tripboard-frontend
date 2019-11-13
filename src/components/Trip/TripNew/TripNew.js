@@ -20,7 +20,13 @@ export default function TripNew(props) {
 
   useEffect(() => {
     setError(error);
+    setTimeout(() => setError(''), 3000);
   }, [errorMessage]);
+
+  useEffect(() => {
+    setError(error);
+    setTimeout(() => setError(''), 3000);
+  }, [error]);
 
   const [userInput, setUserInput] = useReducer((state, newState) => ({...state, ...newState}), {
     title: '',
@@ -169,6 +175,7 @@ export default function TripNew(props) {
               dropdownMode="select"
               dateFormatCalendar={"MMM yyyy"}
             />
+            <span className='date-text'>-</span>
             <DatePicker
               name='edate'
               selected={edate}
@@ -192,27 +199,27 @@ export default function TripNew(props) {
               onChange={handleChange}
               readOnly
             />
-            <button type='button' onClick={handleShowMapClick}>검색</button>
+            <button type='button' className='button-place-search' onClick={handleShowMapClick}></button>
           </label>
           <label>
-            <span>pictures(한번에 최대 10개 파일 등록 가능합니다)</span>
+            <span>사진 <span className='info-text'>(한번에 최대 10개 파일까지 등록 가능합니다)</span></span>
             <input
               type="file"
               name="file"
               onChange={handleChange}
               multiple
             />
-            <button type="button" onClick={handleFilePost}>file upload</button>
+            <button type="button" className='button-upload' onClick={handleFilePost}></button>
 
 
           </label>
           {
             photoList.length > 0 ?
-            <ul>{photoList}</ul> :
+            <ul className='file-list'>{photoList}</ul> :
             null
           }
           <label>
-            <span>description</span>
+            <span>설명</span>
             <textarea
               name='description'
               value={userInput.description}

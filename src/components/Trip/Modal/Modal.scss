@@ -1,3 +1,5 @@
+@import '../../App/base.scss';
+
 .modal {
   position: fixed;
   z-index: 1;
@@ -5,14 +7,18 @@
   top: 0;
   width: 100vw;
   height: 100vh;
-  overflow: auto;
+  overflow: hidden;
   background-color: rgba(73, 80, 86, 0.95);
 
   .wrap {
     width: 100vw;
-    margin: 0 auto;
+    height: 100vh;
+    position: relative;
+    margin: 55vh auto auto;
+    transform: translateY(-40vh);
 
     .slide-box {
+      position: relative;
       width: 100%;
       overflow: hidden;
       margin: 0 auto;
@@ -20,6 +26,7 @@
       .picture-list {
         position: relative;
         display: flex;
+        align-items: center;
         transition: all 300ms ease 0s;
 
         li {
@@ -28,9 +35,33 @@
 
           img {
             max-width: 100%;
-            max-height: 66vh;
+            // max-height: 66vh;
           }
         }
+      }
+
+      .button-left {
+        position: absolute;
+        left: 2rem;
+        top: 50%;
+        background: hsla(0,0%,100%,.1) url(#{$assetPath}/left.png) no-repeat 0 0;
+        background-size: cover;
+        width: 4rem;
+        height: 7rem;
+        vertical-align: middle;
+        margin-top: -4rem;
+      }
+
+      .button-right {
+        position: absolute;
+        right: 2rem;
+        top: 50%;
+        background: hsla(0,0%,100%,.1) url(#{$assetPath}/right.png) no-repeat 0 0;
+        background-size: cover;
+        width: 4rem;
+        height: 7rem;
+        vertical-align: middle;
+        margin-top: -4rem;
       }
     }
 
