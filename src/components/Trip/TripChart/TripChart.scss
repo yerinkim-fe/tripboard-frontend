@@ -1,14 +1,21 @@
 @import '../../App/base.scss';
 
 .chart {
-  padding: 2rem;
+  padding: 0 2rem;
 
   .item {
-    padding-bottom: 2rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    border-bottom: 1px solid #eee;
+    border-radius: 2rem;
+    background: #fff;
+    box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.1);
 
     h3 {
       font-size: 1.6rem;
-      padding-bottom: 1rem;
+      padding-bottom: 2rem;
+      color: #666;
+      font-weight: bold;
     }
   }
 }

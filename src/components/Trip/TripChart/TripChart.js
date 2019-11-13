@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
-import { Line, Doughnut, Bar } from 'react-chartjs-2';
+import { Line, Pie, Bar } from 'react-chartjs-2';
 import Header from '../../App/Header';
 import './TripChart.scss';
 
@@ -8,7 +7,7 @@ import './TripChart.scss';
 export default function TripChart(props) {
   const { history, trip, user, onTripLoad } = props;
   const [ dataLine, setDataLine ] = useState();
-  const [ dataDoughnut, setDataDoughnut ] = useState();
+  const [ dataPie, setDataPie ] = useState();
   const [ dataBar, setDataBar ] = useState();
 
   useEffect(() => {
@@ -50,28 +49,28 @@ export default function TripChart(props) {
         }
       });
 
-      const yearData = {
-        labels: Object.keys(year),
+      const mm = Object.keys(month).map(mm => `${Number(mm) + 1}월`);
+      const barData = {
+        labels: mm,
         datasets: [
           {
-            label: '연도별 여행일수',
-            backgroundColor: 'rgba(255,99,132,0.2)',
-            borderColor: 'rgba(255,99,132,1)',
+            label: '월별 여행일수',
+            backgroundColor: '#54D3C2',
+            borderColor: '#54D3C2',
             borderWidth: 1,
-            hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-            hoverBorderColor: 'rgba(255,99,132,1)',
-            data: Object.values(year)
+            hoverBackgroundColor: '#54D3C2',
+            hoverBorderColor: '#54D3C2',
+            data: Object.values(month)
           }
         ]
       };
-      setDataBar(yearData);
+      setDataBar(barData);
 
-      const mm = Object.keys(month).map(mm => `${Number(mm) + 1}월`);
 
-      const monthData = {
-        labels: mm,
+      const PieData = {
+        labels: Object.keys(place),
         datasets: [{
-          data: Object.values(month),
+          data: Object.values(place),
           backgroundColor: [
             '#47ACB1',
             '#F36422',
@@ -102,35 +101,34 @@ export default function TripChart(props) {
           ]
         }],
       };
-      setDataDoughnut(monthData);
+      setDataPie(PieData);
 
-      const placeData = {
-        labels: Object.keys(place),
+      const lineData = {
+        labels: Object.keys(year),
         datasets: [
           {
-            label: '여행지별 방문횟수',
             fill: false,
             lineTension: 0.1,
-            backgroundColor: 'rgba(75,192,192,0.4)',
-            borderColor: 'rgba(75,192,192,1)',
+            backgroundColor: '#5799DA',
+            borderColor: '#5799DA',
             borderCapStyle: 'butt',
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'miter',
-            pointBorderColor: 'rgba(75,192,192,1)',
+            pointBorderColor: '#5799DA',
             pointBackgroundColor: '#fff',
             pointBorderWidth: 1,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-            pointHoverBorderColor: 'rgba(220,220,220,1)',
+            pointHoverBackgroundColor: '#5799DA',
+            pointHoverBorderColor: '#5799DA',
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: Object.values(place),
+            data: Object.values(year),
           }
         ]
       };
-      setDataLine(placeData);
+      setDataLine(lineData);
     }
   }, [trip]);
 
@@ -145,47 +143,44 @@ export default function TripChart(props) {
         dataBar &&
 
         <div className='chart'>
+
           <div className='item'>
-            <h3>연도별 여행일수</h3>
-            <Bar
-              data={dataBar}
-              // width={100}
-              // height={50}
-              // options={{
-              //   maintainAspectRatio: false
-              // }}
+            <h3>연도별 방문횟수</h3>
+            <Line
+              data={dataLine}
+              options={{
+                legend: {
+                  display: false
+                }
+              }}
             />
           </div>
 
           <div className='item'>
             <h3>월별 여행일수</h3>
-            <Doughnut
-              data={dataDoughnut}
+            <Bar
+              data={dataBar}
               options={{
-                responsive: true,
-                maintainAspectRatio: true,
+                legend: {
+                  display: false
+                },
               }}
             />
           </div>
 
           <div className='item'>
             <h3>여행지별 방문횟수</h3>
-            <Line
-              data={dataLine}
-              // options={{
-              //   title: {
-              //     display: true,
-              //     text:'Average per month',
-              //     fontSize:20
-              //   },
-              //   legend: {
-              //     display: true,
-              //     position:'right'
-              //   },
-              //   tooltip: true,
-              //   responsive: true,
-              //   // maintainAspectRatio: false
-              // }}
+            <Pie
+              data={dataPie}
+              width={80}
+              height={80}
+              options={{
+                legend: {
+                  display: true,
+                  position: 'bottom',
+                  align: "start"
+                }
+              }}
             />
           </div>
         </div>
