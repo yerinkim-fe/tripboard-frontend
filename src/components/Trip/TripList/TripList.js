@@ -21,7 +21,8 @@ export default function TripList(props) {
             {trip.title}
           </p>
           <p className='place'>
-            {trip.address.city}, {trip.address.country}
+            {trip.address.country && trip.address.country}
+            {trip.address.city && ` ${trip.address.city}`}
           </p>
         </Link>
       </li>
