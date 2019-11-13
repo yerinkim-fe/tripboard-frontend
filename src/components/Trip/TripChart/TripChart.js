@@ -145,7 +145,7 @@ export default function TripChart(props) {
         <div className='chart'>
 
           <div className='item'>
-            <h3>연도별 방문횟수</h3>
+            <h3>연도별 여행일수</h3>
             <Line
               data={dataLine}
               options={{

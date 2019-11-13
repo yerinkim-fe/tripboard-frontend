@@ -4,6 +4,7 @@ import Geocode from 'react-geocode';
 import Autocomplete from 'react-google-autocomplete';
 import Error from '../../Error/Error';
 import './TripMap.scss';
+import marker from '../../../images/marker.png';
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLEMAP_APIKEY);
 Geocode.setLanguage('ko');
@@ -144,6 +145,7 @@ export default function TripMap(props) {
         draggable={true}
         onDragEnd={ onMarkerDragEnd }
         position={{ lat: markerPosition.lat, lng: markerPosition.lng }}
+        icon={marker}
       />
     </GoogleMap>
   ));

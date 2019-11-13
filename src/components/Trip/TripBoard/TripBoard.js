@@ -4,6 +4,7 @@ import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import TripList from '../TripList/TripList';
 import Error from '../../Error/Error';
 import './TripBoard.scss';
+import marker from '../../../images/marker.png';
 
 export default function TripBoard(props) {
   const { user, trip, onTripLoad, onSignOut, errorMessage, history } = props;
@@ -31,6 +32,12 @@ export default function TripBoard(props) {
       onTripLoad(user.user_id);
     }
   }, [user]);
+
+  useEffect(() => {
+    if (!trip.length && user) {
+      onTripLoad(user.user_id);
+    }
+  }, [trip.length]);
 
   useEffect(() => {
     if (trip.length > 0) {
@@ -73,6 +80,7 @@ export default function TripBoard(props) {
             position={{ lat: place.location.coordinates[1], lng: place.location.coordinates[0] }}
             key={place._id}
             onClick={() => handleMarkerClick(place._id)}
+            icon={marker}
           />
         ))
       }
