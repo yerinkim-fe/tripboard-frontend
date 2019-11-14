@@ -16,6 +16,11 @@ export const tripDataLoad = trip => ({
   trip
 });
 
+export const tripDetailDataLoad = tripDetail => ({
+  type: types.TRIP_DETAIL_DATA_LOAD,
+  tripDetail
+});
+
 export const setError = message => ({
   type: types.SET_ERROR,
   message

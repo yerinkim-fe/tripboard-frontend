@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import SignIn from '../Auth/SignIn/SignIn';
 import SignUp from '../Auth/SignUp/SignUp';
@@ -9,7 +9,7 @@ import TripChart from '../Trip/TripChart/TripChart';
 import './App.scss';
 
 export default function App(props) {
-  const { onConfirmUser, isAuthenticated, user, onSignIn, onSignOut, onTripLoad, trip, tripDetail, onTripDetailLoad, errorMessage } = props;
+  const { onConfirmUser, isAuthenticated, user, onSignIn, onSignOut, onTripLoad, trip, onTripDetailLoad, tripDetail, errorMessage } = props;
 
   useEffect(() => {
     if (localStorage.jwtToken) {
@@ -97,6 +97,8 @@ export default function App(props) {
           render={routeProps => {
             return <TripDetail
               {...routeProps}
+              onTripDetailLoad={onTripDetailLoad}
+              tripDetail={tripDetail}
               errorMessage={errorMessage}
             />
           }}

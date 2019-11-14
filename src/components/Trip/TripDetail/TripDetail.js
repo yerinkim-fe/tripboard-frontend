@@ -2,13 +2,11 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 import Error from '../../Error/Error';
 import Header from '../../App/Header';
 import Modal from '../Modal/Modal';
-import { getTripDetail } from '../../../api';
 import getDateFormat from '../../../utils/getDateFormat';
 import './TripDetail.scss';
 
 export default function TripDetail(props) {
-  const { errorMessage, history, match } = props;
-  const [ tripDetail, setTripDetail ] = useState('');
+  const { errorMessage, history, match, onTripDetailLoad, tripDetail } = props;
   const [ isModalShow, setIsModalShow ] = useState(false);
   const [ size, setSize ] = useState([0, 0]);
   const [ slideWidth, setSlideWidth ] = useState('');
@@ -18,14 +16,11 @@ export default function TripDetail(props) {
   const [ slideRight, setSlideRight ] = useState(false);
   const [ error, setError ] = useState('');
 
-  const getTrip = async () => {
-    const res = await getTripDetail(match.params.trip_id);
-    setTripDetail(res.data.trip);
-  };
-
   useEffect(() => {
-    getTrip();
+    onTripDetailLoad(match.params.trip_id);
   }, []);
+
+  console.log(tripDetail);
 
   useLayoutEffect(() => {
     function updateSize() {

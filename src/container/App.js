@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { withScriptjs } from 'react-google-maps';
 import App from '../components/App/App';
-import { getToken, getTrip } from '../api';
-import { setIsAuthenticated, setCurrentUser, tripDataLoad, setError } from '../actions';
+import { getToken, getTrip, getTripDetail } from '../api';
+import { setIsAuthenticated, setCurrentUser, tripDataLoad, tripDetailDataLoad, setError } from '../actions';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 import jwt from 'jsonwebtoken';
 
@@ -11,6 +11,7 @@ const mapStateToProps = state => {
     isAuthenticated: state.isAuthenticated,
     user: state.user,
     trip: state.trip,
+    tripDetail: state.tripDetail,
     errorMessage: state.errorMessage
   };
 };
@@ -57,6 +58,16 @@ const mapDispatchToProps = dispatch => {
       if (res.status === 200) {
         const trip = res.data.trip;
         dispatch(tripDataLoad(trip));
+      } else {
+        dispatch(setError(res.data.message));
+      }
+    },
+    async onTripDetailLoad(tripId) {
+      const res = await getTripDetail(tripId);
+
+      if (res.status === 200) {
+        const tripDetail = res.data.trip;
+        dispatch(tripDetailDataLoad(tripDetail));
       } else {
         dispatch(setError(res.data.message));
       }

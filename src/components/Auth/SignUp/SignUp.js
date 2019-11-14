@@ -125,7 +125,10 @@ export default function SignUp(props) {
           <input type='submit' value='등록' />
         </form>
 
-        <p className='account'>Already have an account? <Link to={'/signin'}>Sign in</Link></p>
+        <p className='account'>
+          Already have an account?
+          <Link to={'/signin'}>Sign in</Link>
+        </p>
       </div>
 
       {

@@ -13,6 +13,7 @@ const initialState = {
   isAuthenticated: isToken(),
   user: null,
   trip: [],
+  tripDetail: '',
   errorMessage: ''
 };
 
@@ -46,6 +47,16 @@ export function tripReducer(state = initialState.trip, action) {
   }
 }
 
+export function tripDetailReducer(state = initialState.tripDetail, action) {
+  switch(action.type) {
+    case types.TRIP_DETAIL_DATA_LOAD:
+      return action.tripDetail;
+
+    default:
+      return state;
+  }
+}
+
 export function errorReducer(state = initialState.errorMessage, action) {
   switch(action.type) {
     case types.SET_ERROR:
@@ -60,5 +71,6 @@ export default combineReducers({
   isAuthenticated: authReducer,
   user: userReducer,
   trip: tripReducer,
+  tripDetail: tripDetailReducer,
   errorMessage: errorReducer
 });
