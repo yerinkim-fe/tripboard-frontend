@@ -20,8 +20,6 @@ export default function TripDetail(props) {
     onTripDetailLoad(match.params.trip_id);
   }, []);
 
-  console.log(tripDetail);
-
   useLayoutEffect(() => {
     function updateSize() {
       setSize([ window.innerWidth, window.innerHeight ]);
@@ -61,7 +59,6 @@ export default function TripDetail(props) {
   }, [error]);
 
   const checkSlideIndex = slideIndex => {
-    console.log(slideIndex, tripDetail.pictures.length);
     if (tripDetail.pictures.length > 1) {
       setSlideRight(true);
       setSlideLeft(true);

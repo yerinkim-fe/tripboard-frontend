@@ -29,7 +29,7 @@ export default function SignIn(props) {
     setUserInput({ [name]: newValue });
   }
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
 
     if (!userInput.email) {
