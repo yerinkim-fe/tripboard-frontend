@@ -6,7 +6,7 @@ import Error from '../../Error/Error';
 import './TripMap.scss';
 import marker from '../../../images/marker.png';
 
-Geocode.setApiKey(process.env.NETLIFY_GOOGLEMAP_APIKEY);
+Geocode.setApiKey(process.env.REACT_APP_GOOGLEMAP_APIKEY);
 Geocode.setLanguage('ko');
 Geocode.enableDebug();
 

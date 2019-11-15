@@ -26,7 +26,7 @@ const mapDispatchToProps = dispatch => {
         localStorage.setItem('jwtToken', token);
         setAuthorizationToken();
 
-        const user = jwt.verify(token, process.env.NETLIFY_YOUR_SECRET_KEY);
+        const user = jwt.verify(token, process.env.REACT_APP_YOUR_SECRET_KEY);
         dispatch(setCurrentUser(user));
         dispatch(setIsAuthenticated(true));
       } else {
@@ -42,7 +42,7 @@ const mapDispatchToProps = dispatch => {
     onConfirmUser(token) {
       try {
         setAuthorizationToken();
-        const user = jwt.verify(token, process.env.NETLIFY_YOUR_SECRET_KEY);
+        const user = jwt.verify(token, process.env.REACT_APP_YOUR_SECRET_KEY);
         dispatch(setCurrentUser(user));
         dispatch(setIsAuthenticated(true));
       } catch (err) {
