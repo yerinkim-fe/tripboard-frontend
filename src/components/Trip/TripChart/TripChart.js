@@ -3,7 +3,6 @@ import { Line, Pie, Bar } from 'react-chartjs-2';
 import Header from '../../App/Header';
 import './TripChart.scss';
 
-
 export default function TripChart(props) {
   const { history, trip, user, onTripLoad } = props;
   const [ dataLine, setDataLine ] = useState();
@@ -11,13 +10,12 @@ export default function TripChart(props) {
   const [ dataBar, setDataBar ] = useState();
 
   useEffect(() => {
-    if (!trip.length && user) {
+    if (user) {
       onTripLoad(user.user_id);
     }
   }, [user]);
 
   useEffect(() => {
-
     if (trip.length) {
       const year = {}
       const month = {}
@@ -140,50 +138,60 @@ export default function TripChart(props) {
       />
 
       {
-        dataBar &&
+        trip.length > 0 ?
 
         <div className='chart'>
 
-          <div className='item'>
-            <h3>연도별 여행일수</h3>
-            <Line
-              data={dataLine}
-              options={{
-                legend: {
-                  display: false
-                }
-              }}
-            />
-          </div>
+          {
+            dataLine &&
+            <div className='item'>
+              <h3>연도별 여행일수</h3>
+              <Line
+                data={dataLine}
+                options={{
+                  legend: {
+                    display: false
+                  }
+                }}
+              />
+            </div>
+          }
 
-          <div className='item'>
-            <h3>월별 여행일수</h3>
-            <Bar
-              data={dataBar}
-              options={{
-                legend: {
-                  display: false
-                },
-              }}
-            />
-          </div>
+          {
+            dataBar &&
+            <div className='item'>
+              <h3>월별 여행일수</h3>
+              <Bar
+                data={dataBar}
+                options={{
+                  legend: {
+                    display: false
+                  },
+                }}
+              />
+            </div>
+          }
 
-          <div className='item'>
-            <h3>여행지별 방문횟수</h3>
-            <Pie
-              data={dataPie}
-              width={80}
-              height={80}
-              options={{
-                legend: {
-                  display: true,
-                  position: 'bottom',
-                  align: "start"
-                }
-              }}
-            />
-          </div>
-        </div>
+          {
+            dataPie &&
+            <div className='item'>
+              <h3>여행지별 방문횟수</h3>
+              <Pie
+                data={dataPie}
+                width={80}
+                height={80}
+                options={{
+                  legend: {
+                    display: true,
+                    position: 'bottom',
+                    align: "start"
+                  }
+                }}
+              />
+            </div>
+          }
+        </div> :
+        <p className='nodata'>데이터가 없습니다.</p>
       }
     </div>
   )

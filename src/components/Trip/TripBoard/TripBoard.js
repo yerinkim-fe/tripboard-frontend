@@ -22,32 +22,16 @@ export default function TripBoard(props) {
     lng: center.lng
   });
 
-  const [ markerPosition, setMarkerPosition ] = useState({
-    lat: center.lat,
-    lng: center.lng
-  });
-
   useEffect(() => {
-    if (!trip.length && user) {
+    if (user) {
       onTripLoad(user.user_id);
     }
   }, [user]);
 
   useEffect(() => {
-    if (!trip.length && user) {
-      onTripLoad(user.user_id);
-    }
-  }, [trip.length]);
-
-  useEffect(() => {
     if (trip.length > 0) {
       const lat = trip[0].location.coordinates[1];
       const lng = trip[0].location.coordinates[0];
-
-      setMarkerPosition({
-        lat,
-        lng
-      });
 
       setMapPosition({
         lat,

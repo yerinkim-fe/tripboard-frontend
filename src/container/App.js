@@ -38,6 +38,7 @@ const mapDispatchToProps = dispatch => {
       setAuthorizationToken();
       dispatch(setCurrentUser({}));
       dispatch(setIsAuthenticated(false));
+      dispatch(tripDataLoad([]));
     },
     onConfirmUser(token) {
       try {

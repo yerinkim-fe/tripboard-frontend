@@ -35,7 +35,7 @@ export default function TripList(props) {
         {
           tripList.length > 0 ?
           <ul>{tripList}</ul> :
-          null
+          <p className='nodata'>데이터가 없습니다.</p>
         }
       </div>
 
