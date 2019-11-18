@@ -109,11 +109,9 @@ export default function TripBoard(props) {
 
       </header>
 
-
       {map}
 
       <Link to='/new' className='button-plus'></Link>
-
 
       {
         isList &&
