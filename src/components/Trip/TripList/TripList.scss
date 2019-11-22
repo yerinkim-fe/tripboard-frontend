@@ -3,7 +3,7 @@
 .trip-list {
   width: 100vw;
   height: 100vh;
-  background: #F6F6F6;
+  background: $bg-color1;
   box-sizing: border-box;
   position: absolute;
   top: 0;
@@ -24,9 +24,9 @@
         a {
           display: block;
           position: relative;
-          background: #fff;
+          background: $bg-color3;
           border-radius: 1rem;
-          border: 1px solid #eee;
+          border: 1px solid $bd-color1;
           padding: 2rem 3rem 2rem 8.5rem;
           text-decoration: none;
           transition: box-shadow .3s;
@@ -42,7 +42,7 @@
             top: 24px;
             width: 50px;
             height: 50px;
-            background: #fff url(#{$assetPath}/airplane.png) no-repeat 0 0;
+            background: $bg-color3 url(#{$assetPath}/airplane.png) no-repeat 0 0;
             background-size: contain;
           }
 
@@ -51,18 +51,18 @@
           }
 
           .title {
-            color: #666;
+            color: $font-color4;
             font-size: 1.4rem;
           }
 
           .date {
-            color: #000;
+            color: $font-color5;
             font-size: 1.6rem;
             font-weight: bold;
           }
 
           .place {
-            color: #666;
+            color: $font-color4;
             font-size: 1.4rem;
           }
         }

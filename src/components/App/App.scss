@@ -6,11 +6,12 @@ html {
   font-size: 10px;
 
   body {
-    background: #F6F6F6;
+    background: $bg-color1;
+
     .container {
       width: 100vw;
       height: 100vh;
-      background: $bg-color;
+      background: $bg-color1;
       margin: 0 auto;
     }
 
@@ -25,7 +26,7 @@ html {
       }
 
       input[type=text]:read-only {
-        background: #eee;
+        background: $bg-color2;
       }
 
       input[type=submit] {

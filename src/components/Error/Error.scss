@@ -1,3 +1,5 @@
+@import '../APP/base.scss';
+
 .error {
   position: fixed;
   bottom: 10px;
@@ -8,10 +10,9 @@
   padding: 1rem 2rem;
   box-sizing: border-box;
   z-index: 2;
-  // animation: fadeOut 5s linear forwards;
 
   .error-message {
-    color: #fff;
+    color: $font-color3;
     font-size: 1.4rem;
   }
 }

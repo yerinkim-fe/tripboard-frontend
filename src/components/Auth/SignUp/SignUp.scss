@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400|Roboto+Slab:400&display=swap');
+@import '../../APP/base.scss';
+
 $assetPath : "../../../images";
 
 .signup {
@@ -6,7 +8,7 @@ $assetPath : "../../../images";
   align-items: center;
   width: 100vw;
   min-height: 100vh;
-  background: #F6F6F6;
+  background: $bg-color1;
 
   .auth {
     position: absolute;
@@ -18,12 +20,12 @@ $assetPath : "../../../images";
 
     .account {
       font-size: 1.4rem;
-      color: rgb(145, 145, 145);
+      color: $font-color2;
 
       a {
         display: inline-block;
         padding-left: 0.5rem;
-        color: #54D3C2;
+        color: $primary-color;
         font-weight: bold;
         text-decoration: none;
       }

@@ -3,7 +3,22 @@
 $assetPath : "../../../images";
 
 $primary-color: #54D3C2;
-$bg-color: #f6f6f6;
+
+$bg-color1: #f6f6f6;
+$bg-color2: #eee;
+$bg-color3: #fff;
+
+$bd-color1: #eee;
+$bd-color2: #ddd;
+$bd-color3: #999;
+
+$font-color1: #a5a5a5;
+$font-color2: #919191;
+$font-color3: #fff;
+$font-color4: #666;
+$font-color5: #000;
+$font-color6: #999;
+
 
 
 @mixin input-default {

@@ -13,7 +13,7 @@
       display: block;
       font-size: 1.6rem;
       margin-bottom: 1rem;
-      color: #666;
+      color: $font-color4;
 
       .info-text {
         display: inline-block;
@@ -63,8 +63,8 @@
     li {
       padding: 1rem 0;
       font-size: 1.4rem;
-      color: #999;
-      border-bottom: 1px dotted #999;
+      color: $font-color6;
+      border-bottom: 1px dotted $bd-color3;
     }
   }
 }
