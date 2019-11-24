@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "cypress": "^3.6.1",
+    "cypress-file-upload": "^3.5.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "node-sass": "^4.13.0"
